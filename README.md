@@ -10,7 +10,11 @@ Instead of simply asking whether an item is "waste", the assistant recommends on
 
 ## 🚀 Live Demo
 
-The AI E-Waste Assistant is deployed using Streamlit Community Cloud and is publicly accessible as a web application.
+Try the deployed application:
+
+**[🌐 Open AI E-Waste Assistant](https://e-waste-assistant-a4wa84aa5pire3kkfgsrro.streamlit.app/)**
+
+The application is deployed using Streamlit Community Cloud.
 
 ---
 
