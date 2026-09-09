@@ -8,6 +8,12 @@ Instead of simply asking whether an item is "waste", the assistant recommends on
 
 ---
 
+## 🚀 Live Demo
+
+The AI E-Waste Assistant is deployed using Streamlit Community Cloud and is publicly accessible as a web application.
+
+---
+
 ## 🎯 Problem Statement
 
 Electronic waste is increasing rapidly, while people often do not know what to do with old, damaged, or unwanted electronic devices.
@@ -123,39 +129,17 @@ e-waste-assistant/
 ├── knowledge_base.txt
 ├── requirements.txt
 ├── README.md
-├── .gitignore
-└── .env
+└── .gitignore
 
-> `.env` contains the API key and is intentionally excluded from GitHub using `.gitignore`.
+> API credentials are stored securely outside the Git repository and are never committed to source control.
 
 ---
 
-## 🚀 Run Locally
+## ☁️ Deployment
 
-### 1. Clone the repository
+The application is deployed using Streamlit Community Cloud.
 
-git clone https://github.com/tanushka-devabattula/e-waste-assistant.git
-cd e-waste-assistant
-
-### 2. Install dependencies
-
-pip install -r requirements.txt
-
-### 3. Configure the API key
-
-Create a `.env` file in the project directory:
-
-OPENROUTER_API_KEY=your_api_key_here
-
-Replace `your_api_key_here` with your own OpenRouter API key.
-
-### 4. Run the application
-
-streamlit run app.py
-
-The application will open locally at:
-
-http://localhost:8501
+The application uses a secure deployment secret for the OpenRouter API key rather than storing the key in the GitHub repository.
 
 ---
 
