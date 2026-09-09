@@ -91,32 +91,63 @@ def detect_safety_risk(condition):
 def extract_pathway(result):
     result_lower = result.lower()
 
-    pathway_patterns = [
-        ("Responsible Disposal", "responsible disposal"),
-        ("Donate/Refurbish", "donate/refurbish"),
-        ("Donate/Refurbish", "donate or refurbish"),
-        ("Recycle", "recycle"),
-        ("Reuse", "reuse"),
-        ("Repair", "repair")
-    ]
+    # Normalize spacing around "/" so that:
+    # Donate/Refurbish
+    # Donate / Refurbish
+    # Donate/ Refurbish
+    # Donate /Refurbish
+    # are treated the same.
+    normalized_result = re.sub(
+        r"\s*/\s*",
+        "/",
+        result_lower
+    )
 
     # Look specifically near "Recommended Pathway"
     match = re.search(
-        r"recommended pathway\s*:?\s*(.{0,100})",
-        result_lower
+        r"recommended pathway\s*:?\s*(.{0,150})",
+        normalized_result
     )
 
     if match:
         recommended_text = match.group(1)
 
-        for pathway, keyword in pathway_patterns:
-            if keyword in recommended_text:
-                return pathway
+        if "responsible disposal" in recommended_text:
+            return "Responsible Disposal"
 
-    # Fallback
-    for pathway, keyword in pathway_patterns:
-        if keyword in result_lower:
-            return pathway
+        if "donate/refurbish" in recommended_text:
+            return "Donate/Refurbish"
+
+        if "donate or refurbish" in recommended_text:
+            return "Donate/Refurbish"
+
+        if "recycle" in recommended_text:
+            return "Recycle"
+
+        if "reuse" in recommended_text:
+            return "Reuse"
+
+        if "repair" in recommended_text:
+            return "Repair"
+
+    # Fallback checks
+    if "responsible disposal" in normalized_result:
+        return "Responsible Disposal"
+
+    if "donate/refurbish" in normalized_result:
+        return "Donate/Refurbish"
+
+    if "donate or refurbish" in normalized_result:
+        return "Donate/Refurbish"
+
+    if "recycle" in normalized_result:
+        return "Recycle"
+
+    if "reuse" in normalized_result:
+        return "Reuse"
+
+    if "repair" in normalized_result:
+        return "Repair"
 
     return "Unknown"
 
